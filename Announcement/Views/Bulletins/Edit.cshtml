@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Announcement.Models.Entities.Bulletin
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-9">
+        <div class="mt-2">
+            <h1>編輯公告訊息</h1>
+        </div>
+    </div>
+    <div class="col-md-3 text-end">
+        <div class="mt-3">
+            <a class="btn btn-primary" asp-area="" asp-controller="Bulletins" asp-action="List">返回列表</a>
+        </div>
+    </div>
+</div>
+
+@if (Model is null)
+{
+    <p></p>
+}
+else
+{
+    <form method="post">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mt-2">
+                    <label class="form-label">- 類別</label>
+                    <select class="form-select" asp-for="Category">
+                        <option value="啟保通告">啟保通告</option>
+                        <option value="技術通告">技術通告</option>
+                        <option value="客服通知">客服通知</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="mt-7">
+                    <label class="form-label">- 公告標題</label>
+                    <input type="text" class="form-control" asp-for="Title" />
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="mt-1">
+                    <div style="display: flex; flex-direction: column;">
+                        <label class="form-check-label" for="">- 公告置頂</label>
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" class="form-check-input" id="PinTop" asp-for="PinTop">
+                            <label style="margin-left: 5px;">是</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-3">
+                <label class="form-label">- 上架期間</label>
+                <div class="mt-2">
+                    <input type="date" asp-for="PublishDate">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="mt-5">
+                    <label class="form-label">~</label>
+                </div>
+
+            </div>
+            <div class="col-md-2">
+                <label class="form-label"></label>
+                <div class="mt-3">
+                    <input type="date" asp-for="EndDate">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="mt-2">
+                    <label class="form-label">- 排序</label>
+                    <input type="text" class="form-control" asp-for="Sort" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="mt-2">
+                    <label class="form-label">- 顯示狀態</label>
+                    <select class="form-select" asp-for="Status">
+                        <option value="顯示">顯示</option>
+                        <option value="不顯示">不顯示</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <label class="form-label">- 公告內容</label>
+            <textarea class="form-control" id="content" asp-for="Content"></textarea>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">儲存</button>
+        </div>
+
+    </form>
+}

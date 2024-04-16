@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!--model Announcement.Models.ViewModels.BulletinViewModel
+-->
+@model List<Announcement.Models.Entities.Bulletin>
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-9">
+        <div class="mt-2">
+            <h1>公告管理</h1>
+        </div>
+    </div>
+    <div class="col-md-3 text-end">
+        <div class="mt-3">
+            <a class="btn btn-danger" asp-area="" asp-controller="Bulletins" asp-action="Add">新增</a>
+        </div>
+    </div>
+</div>
+<form method="get" id="searchForm">
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-3">
+            <label class="form-label">- 上架日期</label>
+            <div class="mt-2">
+                <input type="date" name="startDate">
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="mt-5">
+                <label class="form-label">~</label>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <label class="form-label"></label>
+            <div class="mt-3">
+                <input type="date" name="endDate">
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label class="form-label">- 公告標題</label>
+        <input type="text" class="form-control" name="searchQuery" value="@ViewBag.SearchQuery">
+    </div>
+    <div class="mt-3 text-center">
+        <button type="button" class="btn btn-secondary" id="resetBtn">重置</button>
+        <button type="submit" class="btn btn-primary">查詢</button>
+    </div>
+</form>
+
+<table class="table">
+    <thread>
+        <tr>
+            <th>No.</th>
+            <th>類別</th>
+            <th>標題</th>
+            <th>上架日</th>
+            <th>狀態</th>
+            <th>操作</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var bulletin in Model)
+        {
+            <tr>
+                <td>@bulletin.Id</td>
+                <td>@bulletin.Category</td>
+                <td>@bulletin.Title</td>
+                <td>@bulletin.PublishDate</td>
+                <td>@bulletin.Status</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Bulletins" asp-action="Edit" asp-route-id="@bulletin.Id">編輯</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    // 取得重置按鈕元素
+    var resetBtn = document.getElementById('resetBtn');
+    // 為重置按鈕添加點擊事件監聽器
+    resetBtn.addEventListener('click', function () {
+        // 取得表單元素
+        var form = document.getElementById('searchForm');
+        // 重置表單
+        form.reset();
+    });
+</script>
